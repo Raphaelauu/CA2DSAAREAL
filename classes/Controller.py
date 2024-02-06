@@ -72,12 +72,17 @@ class Controller:
         print("Current Assignment Statements:")
         sortedvalues = [(i[1].fast_eval, i[0], i[1].expression) for i in sorted(global_hash_table.items(), key=lambda x: float('-inf') if x[1].fast_eval is None else x[1].fast_eval, reverse=True)]
         for i in sortedvalues:
-            if i[0] != prev_i[0]:
-                content += (f'\n\n*** Statements with value=> {i[0]}')
-                content += (f'\n{i[1]}={i[2]}')
+            if i[0] != prev_i[0] and i[0] != sortedvalues[0][0]:
+                content += (f'\n*** Statements with value=> {i[0]}\n')
+                content += (f'{i[1]}={i[2]}')
                 prev_i = i
+            elif i[0] == prev_i[0]:
+                content += (f'{i[1]}={i[2]}')
             else:
-                content += (f'\n{i[1]}={i[2]}')
+                content += (f'*** Statements with value=> {i[0]}\n')
+                content += (f'{i[1]}={i[2]}')
+                prev_i = i
+            content += '\n'
         self.IO.write_file(outputpath,content)
         print(f'file {outputpath} written successfully!')
         return None

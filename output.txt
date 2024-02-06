@@ -1,5 +1,3 @@
-
-
 *** Statements with value=> 240.0
 Durian= ( Apple * Pear ) 
 
