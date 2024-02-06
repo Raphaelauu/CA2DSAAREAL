@@ -38,8 +38,8 @@ class Controller:
     def option2(self):
         print("Current Assignment Statements:")
         for i in global_hash_table:
-            print(f'{i} ={global_hash_table[i].expression}=> {global_hash_table[i].fast_eval}')
-
+            if global_hash_table[i].expression != None:
+                print(f'{i} ={global_hash_table[i].expression}=> {global_hash_table[i].fast_eval}')
         return None
     
     def option3(self):
@@ -63,31 +63,32 @@ class Controller:
                         global_hash_table[expression[0]]=e
         print("Current Assignment Statements:")
         for i in global_hash_table:
-            print(f'{i} ={global_hash_table[i].expression}=> {global_hash_table[i].fast_eval}')
+            if global_hash_table[i].expression != None:
+                print(f'{i} ={global_hash_table[i].expression}=> {global_hash_table[i].fast_eval}')
         return None
     def option5(self):
         content =''
         prev_i = ('','','')
         outputpath = input('Please enter output file: ')
-        print("Current Assignment Statements:")
         sortedvalues = [(i[1].fast_eval, i[0], i[1].expression) for i in sorted(global_hash_table.items(), key=lambda x: float('-inf') if x[1].fast_eval is None else x[1].fast_eval, reverse=True)]
         for i in sortedvalues:
-            if i[0] != prev_i[0] and i[0] != sortedvalues[0][0]:
-                content += (f'\n*** Statements with value=> {i[0]}\n')
-                content += (f'{i[1]}={i[2]}')
-                prev_i = i
-            elif i[0] == prev_i[0]:
-                content += (f'{i[1]}={i[2]}')
-            else:
-                content += (f'*** Statements with value=> {i[0]}\n')
-                content += (f'{i[1]}={i[2]}')
-                prev_i = i
-            content += '\n'
+            if i[2] != None:
+                if i[0] != prev_i[0] and i[0] != sortedvalues[0][0]:
+                    content += (f'\n*** Statements with value=> {i[0]}\n')
+                    content += (f'{i[1]}={i[2]}')
+                    prev_i = i
+                elif i[0] == prev_i[0]:
+                    content += (f'{i[1]}={i[2]}')
+                else:
+                    content += (f'*** Statements with value=> {i[0]}\n')
+                    content += (f'{i[1]}={i[2]}')
+                    prev_i = i
+                content += '\n'
         self.IO.write_file(outputpath,content)
         print(f'file {outputpath} written successfully!')
         return None
     def option6(self):
-        return None
+        
     def option7(self):
         return None
 

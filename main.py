@@ -13,8 +13,6 @@ if __name__ == "__main__":
 *  - Class DAAA/2B/07                                     *
 *                                                         *
 ***********************************************************
-        
-
 Press enter key to continue...""")
     input()
     controller = Controller()
